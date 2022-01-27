@@ -30,26 +30,17 @@ variables:
 stages:
 - stage: Deploy
   displayName: Deploy stage
-  # dependsOn: Build
-
   jobs:
-  - deployment: Deploy
-    condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/')))
+  - job: Deploy
     displayName: Deploy
     pool:
       vmImage: $(vmImageName)
-    environment: test2
-    strategy:
-      rolling:
-        deploy:
-          steps:
-          - task: KubernetesManifest@0
-            displayName: Deploy
-            inputs:
-              action: deploy
-              kubernetesServiceConnection: k8s-demo
-              namespace: test2
-              manifests: |
-                ./ubuntu.yaml
-                ./nginx.yaml
-
+    steps:
+    - task: KubernetesManifest@0
+      displayName: Deploy
+      inputs:
+        kubernetesServiceConnection: k8s-demo
+        namespace: test2
+        manifests: |
+          ubuntu.yaml
+          nginx.yaml
