@@ -46,6 +46,7 @@ stages:
           - task: KubernetesManifest@0
             displayName: Deploy
             inputs:
+              action: deploy
               kubernetesServiceConnection: k8s-demo
               namespace: test2
               manifests: |
