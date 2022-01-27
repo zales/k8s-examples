@@ -38,8 +38,9 @@ stages:
     displayName: Deploy
     pool:
       vmImage: $(vmImageName)
+    environment: test2
     strategy:
-      runOnce:
+      rolling:
         deploy:
           steps:
           - task: KubernetesManifest@0
@@ -49,6 +50,6 @@ stages:
               kubernetesServiceConnection: k8s-demo
               namespace: test2
               manifests: |
-                ubuntu.yaml
-                nginx.yaml
+                ./ubuntu.yaml
+                ./nginx.yaml
 
