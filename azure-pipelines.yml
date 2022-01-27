@@ -38,7 +38,7 @@ stages:
     displayName: Deploy
     pool:
       vmImage: $(vmImageName)
-    environment: 'dev'
+    environment: test2
     strategy:
       runOnce:
         deploy:
