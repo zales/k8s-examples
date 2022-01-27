@@ -39,7 +39,7 @@ stages:
     - task: KubernetesManifest@0
       displayName: Deploy
       inputs:
-        kubernetesServiceConnection: someK8sSC1
+        kubernetesServiceConnection: k8s-demo
         namespace: test2
         manifests: |
           ubuntu.yaml
